@@ -5,9 +5,9 @@
     <head>
     
     <body>
-        <canvas id='model' width='1000' height='600'>
+        <canvas id='model' width='1000' height='1000'>
         </canvas>
-        <div id='graph1' width='1000' height='600'></div>
+        <div id='graph1' width='1000' height='1000'></div>
         <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script>
             var width=800;
@@ -173,7 +173,7 @@
             
             for (i=0; i<100; i++)
             {   x.push(i);
-                y.push(SHbO2CO2(pO2 = i));}
+                y.push(SHbO2CO2(pO2 =40, pco2=i)[1]);}
             
             var traceA = {
             x: x,
@@ -183,7 +183,7 @@
             
             var data = [traceA];
                     
-            //Plotly.plot( lineDiv, data);
+            Plotly.plot( lineDiv, data);
             
             
             var modelUI = 
@@ -253,10 +253,13 @@
                     ctx.lineTo(startx+700,starty+ht+50+ht-100);
                     ctx.moveTo(startx+480,starty+ht+50);
                     ctx.lineTo(startx+480,starty+ht+50+ht-100-res4);
-                    //veno2
+                    //venco2
                     ctx.moveTo(startx+460,starty+ht+50);
                     ctx.lineTo(startx+460,starty+ht+50+ht-100-res4);
-                    ctx.moveTo(startx+400,starty+ht+50);
+                    ctx.moveTo(startx+400+(1-vensco2[0])*60,starty+ht+50+ht-100-res5);
+                    for (i=0; i<100-res5; i++) {
+                        ctx.lineTo(startx+400+(1-vensco2[i])*60, starty+ht+50+ht-100-res5-Math.abs(ht/100*i));
+                    };
                     
                     
                     ctx.stroke();
